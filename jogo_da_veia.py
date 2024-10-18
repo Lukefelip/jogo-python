@@ -26,18 +26,21 @@ while running:
             cor_fundo = cor_fundo + 1 
             if(cor_fundo > 3):
                 cor_fundo = 1
+
+#Desenha tabuleiro    
+#   pygame.draw.line(screen, 'green',(175, 25),(175, 475), 10)
+        pygame.draw.line(screen, 'green',(200, 0),(200, 600), 10)
+        pygame.draw.line(screen, 'green',(400, 0),(400, 600), 10)
+        pygame.draw.line(screen, 'green',(0, 200),(600, 200), 10)
+        pygame.draw.line(screen, 'green',(0, 400),(600, 400), 10)            
     # fill the screen with a color to wipe away anything from last frame
-
-
+    screen.blit(personagem_y,(60,20))
+    screen.blit(personagem_x,(260,30))
+    screen.blit(personagem_y,(460,30))
     # RENDER YOUR GAME HERE
-    if cor_fundo == 1:
-       # screen.fill('blue')
-       screen.blit(personagem_x,(250,250))
-    elif cor_fundo == 2:
-        screen.fill('black')
-        screen.blit(personagem_y,(250,250))
-    else:
-        screen.fill('white')
+      
+    #else:
+        #screen.fill('white')
     # flip() the display to put your work on screen
     pygame.display.flip()
 
