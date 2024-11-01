@@ -23,6 +23,16 @@ tabuleiro_desenhado = False
 coordenada_x = 0
 coordenada_y = 0
 
+q1 = ''
+q2 = ''
+q3 = ''
+q4 = ''
+q5 = ''
+q6 = ''
+q7 = ''
+q8 = ''
+q9 = ''
+
 def desenha_tabuleiro(espessura, cor):
     print('desenha')
     pygame.draw.line(screen, cor,(200, 0),(200, 600), espessura)
@@ -33,25 +43,40 @@ def desenha_tabuleiro(espessura, cor):
 
 
 def faz_jogada():
-
-    if coordenada_x > 0 and coordenada_x < 200 and coordenada_y < 200:
+    global q1, q2, q3, q4, q5, q6, q7, q8, q9
+    status = True
+    if q1 == '' and coordenada_x > 0 and coordenada_x < 200 and coordenada_y < 200:
         screen.blit(jogador_atual,(60,20))
-    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y < 200:
+        q1 = jogador_atual
+    elif q2 == '' and coordenada_x >= 200 and coordenada_x < 400 and coordenada_y < 200:
         screen.blit(jogador_atual,(260,30))
-    elif coordenada_x >= 400 and coordenada_y < 200:
+        q2 = jogador_atual
+    elif q3 == '' and coordenada_x >= 400 and coordenada_y < 200:
         screen.blit(jogador_atual,(460,30))
-    elif coordenada_x < 200 and coordenada_y >= 200 and coordenada_y < 400:
+        q3 = jogador_atual
+    elif q4 == '' and coordenada_x < 200 and coordenada_y >= 200 and coordenada_y < 400:
         screen.blit(jogador_atual,(60,230))
-    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 200 and coordenada_y < 400:
+        q4 = jogador_atual
+    elif q5 == '' and coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 200 and coordenada_y < 400:
         screen.blit(jogador_atual,(260,230))
-    elif coordenada_x >= 400 and coordenada_y >= 200 and coordenada_y < 400:
+        q5 = jogador_atual
+    elif q6 == '' and coordenada_x >= 400 and coordenada_y >= 200 and coordenada_y < 400:
         screen.blit(jogador_atual,(460,230))
-    elif coordenada_x < 200 and coordenada_y >= 400:
+        q6 = jogador_atual
+    elif q7 == '' and coordenada_x < 200 and coordenada_y >= 400:
         screen.blit(jogador_atual,(60,430))
-    elif coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 400:
+        q7 = jogador_atual
+    elif q8 == '' and coordenada_x >= 200 and coordenada_x < 400 and coordenada_y >= 400:
         screen.blit(jogador_atual,(260,430))
-    elif coordenada_x >= 400 and coordenada_y >= 400:
+        q8 = jogador_atual
+    elif q9 == '' and coordenada_x >= 400 and coordenada_y >= 400:
         screen.blit(jogador_atual,(460,430 ))
+        q9 = jogador_atual
+    else:
+        status = False
+    
+    return status
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -68,30 +93,39 @@ while running:
             print('eixo Y:', click_pos[1])
             coordenada_x = click_pos[0]
             coordenada_y = click_pos[1]
-            rodadas = rodadas + 1 
-            if(rodadas > 10):
+            
+            if (rodadas >= 9):
                 screen.fill('black')
                 rodadas = 0
                 coordenada_x = 0
                 coordenada_y = 0
                 tabuleiro_desenhado = False
 
-            if rodadas != 1:
+            if (faz_jogada()):
+                rodadas = rodadas + 1 
                 if jogador_atual == personagem_x:
                     jogador_atual = personagem_o
                 else:
                     jogador_atual = personagem_x
-            else:
-                jogador_atual = personagem_x
 
-            faz_jogada()
 
+            
+    print(q1, q9)
     if tabuleiro_desenhado == False:  
         desenha_tabuleiro(50, 'yellow')
+        q1 = ''
+        q2 = ''
+        q3 = ''
+        q4 = ''
+        q5 = ''
+        q6 = ''
+        q7 = ''
+        q8 = ''
+        q9 = ''
         tabuleiro_desenhado = True
 
              
-    faz_jogada()
+    
 
     
     
